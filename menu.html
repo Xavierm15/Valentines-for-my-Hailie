@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Choose 💕</title>
+
+<style>
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #ffb3c6, #ff4d6d);
+  overflow-x: hidden;
+  animation: fadeIn 0.6s ease;
+}
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+  font-family: 'Patrick Hand', cursive;
+  text-align: center;
+  color: #ff1f5b;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 300px;
+  margin: auto;
+  z-index: 1;
+}
+
+.option {
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+  font-size: 2rem;
+  box-shadow: 0 15px 30px rgba(255,105,180,0.4);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.option:hover {
+  transform: scale(1.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="hearts"></div>
+
+<h1>Pick one 💞</h1>
+
+<div class="menu">
+  <div class="option" onclick="location.href='photos.html'">📸 Photos</div>
+  <div class="option" onclick="location.href='letter.html'">💌 Letter</div>
+  <div class="option" onclick="location.href='gift.html'">🎁 Gift</div>
+</div>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="youandi.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById("bgMusic");
+
+  // START from a specific time the very first time
+  const START_TIME = 2; // seconds (change if you want)
+
+  // Resume time if saved
+  const savedTime = localStorage.getItem("musicTime");
+  music.currentTime = savedTime ? parseFloat(savedTime) : START_TIME;
+
+  // Save current time continuously
+  setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+  }, 1000);
+</script>
+
+
+</body>
+</html>
+
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.querySelector(".hearts").appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>

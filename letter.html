@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Letter 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Patrick Hand', cursive;
+  background: radial-gradient(circle at top, #ffb3c6, #ff4d6d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.paper {
+  background: #fffdf8;
+  width: 90%;
+  max-width: 500px;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 28px,
+      rgba(255,105,180,0.25) 29px
+    );
+  z-index: 1;
+}
+
+.paper h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.paper p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="paper">
+  <h1>For You 💘</h1>
+  <p>
+    My Hailie,<br><br>
+    You are my safe place, my favorite person,
+    and the reason my days feel warmer and softer.
+    Loving you feels easy — like home.<br><br>
+	
+	You will always mean the world to me,
+	and im so grateful to have you in my life.
+	You're my everything!<br><br>
+	
+
+    Thank you for being you, for choosing me,
+    and for filling my life with so much love.<br><br>
+	
+	I will love you until my very last breath!<br><br>
+
+
+    Forever yours ❤️
+  </p>
+</div>
+
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.querySelector(".hearts").appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 350);
+</script>
+
+<button class="menu-btn" onclick="location.href='gift.html'">
+  💕 Gift
+</button>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="youandi.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById("bgMusic");
+
+  // START from a specific time the very first time
+  const START_TIME = 2; // seconds (change if you want)
+
+  // Resume time if saved
+  const savedTime = localStorage.getItem("musicTime");
+  music.currentTime = savedTime ? parseFloat(savedTime) : START_TIME;
+
+  // Save current time continuously
+  setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+  }, 1000);
+</script>
+
+
+</body>
+</html>

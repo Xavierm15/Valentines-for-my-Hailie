@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Our Memories 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Patrick Hand', cursive;
+  background: radial-gradient(circle at top, #ffb3c6, #ff4d6d);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 35px;
+  padding: 30px;
+  max-width: 600px;
+  margin: auto;
+  z-index: 1;
+}
+
+.photo {
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 25px;
+}
+
+.photo img {
+  width: 105%;
+  height: auto;
+  border-radius: 30px;
+  display: block;
+}
+
+}
+
+.photo p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+@media (max-width: 500px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    padding: 25px;
+  }
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<h1>My Favorite Memories 📸</h1>
+
+<div class="gallery">
+  <div class="photo">
+    <img src="pic1.jpg">
+    <p>First day we met 💗</p>
+  </div>
+  <div class="photo">
+    <img src="pic2.jpg">
+    <p>first date date 💞</p>
+  </div>
+  <div class="photo">
+    <img src="pic3.jpg">
+    <p>The day i asked you to be my girlfriend 🥰</p>
+  </div>
+  <div class="photo">
+    <img src="pic4.jpg">
+    <p>my happy place 💕</p>
+  </div>
+</div>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="youandi.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById("bgMusic");
+
+  // START from a specific time the very first time
+  const START_TIME = 2; // seconds (change if you want)
+
+  // Resume time if saved
+  const savedTime = localStorage.getItem("musicTime");
+  music.currentTime = savedTime ? parseFloat(savedTime) : START_TIME;
+
+  // Save current time continuously
+  setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+  }, 1000);
+</script>
+
+</body>
+
+
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.querySelector(".hearts").appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 350);
+</script>
+
+<button class="menu-btn" onclick="location.href='letter.html'">
+  💕 Letter
+</button>
+
+</body>
+</html>

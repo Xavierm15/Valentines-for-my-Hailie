@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #ffb3c6, #ff4d6d);
+  overflow-x: hidden;
+  animation: fadeIn 0.6s ease;
+}
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+body {
+  font-family: 'Patrick Hand', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.container {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  z-index: 1;
+}
+
+h1 { min-height: 70px; }
+
+button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.yes {
+  background: #ff1f5b;
+  color: white;
+}
+
+.no {
+  background: white;
+  color: #ff1f5b;
+  position: relative;
+ 
+}
+
+#startMusicBtn {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #ff1f5b;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+#startMusicBtn:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<button id="startMusicBtn">🎶 Click me first</button>
+
+<div class="container">
+  <h1 id="typewriter"></h1>
+  <button class="yes" onclick="location.href='menu.html'">Yes 💖</button>
+  <button class="no" id="noBtn">No 😅</button>
+</div>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="youandi.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const music = document.getElementById("bgMusic");
+  const startBtn = document.getElementById("startMusicBtn");
+
+  const START_TIME = 2;
+  const savedTime = localStorage.getItem("musicTime");
+  music.currentTime = savedTime ? parseFloat(savedTime) : START_TIME;
+
+  startBtn.addEventListener("click", () => {
+    music.play();
+    startBtn.style.display = "none";
+
+    setInterval(() => {
+      localStorage.setItem("musicTime", music.currentTime);
+    }, 1000);
+  });
+});
+</script>
+
+
+
+<script>
+const text = "Hailie, will you be my Valentine? 💖";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typewriter").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 70);
+  }
+}
+typeWriter();
+
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.transform =
+    `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+});
+
+// Floating hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.querySelector(".hearts").appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flowers for You 💐</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Patrick Hand', cursive;
+  background: radial-gradient(circle at top, #ffb3c6, #ff4d6d);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+/* TITLE */
+h1 {
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  text-align: center;
+  z-index: 1;
+}
+
+/* LAYOUT */
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 35px;
+  align-items: center;
+  z-index: 1;
+}
+
+/* NOTES */
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.note {
+  background: rgba(255,255,255,0.25);
+  padding: 18px 22px;
+  border-radius: 22px;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+/* BOUQUET */
+.center img {
+  width: 230px;
+  border-radius: 50%;
+  box-shadow: 0 0 35px rgba(255,105,180,0.6);
+}
+
+/* HEARTS */
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<h1>Flowers for you, my pretty love 💐</h1>
+
+<div class="wrapper">
+  <div class="notes">
+    <div class="note">You are beautiful 💖</div>
+    <div class="note">My forever 💕</div>
+  </div>
+
+  <div class="center">
+    <img src="bouquet.png" alt="Bouquet">
+  </div>
+
+  <div class="notes">
+    <div class="note">I adore you 🌹</div>
+    <div class="note"> You're the best 💘</div>
+  </div>
+</div>
+
+<h2> I LOVE YOU ALWAYS! </h2>
+
+
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 18 + 16 + "px";
+  document.querySelector(".hearts").appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+<button class="menu-btn" onclick="location.href='menu.html'">
+  💕 Menu
+</button>
+
+<button class="home-btn" onclick="location.href='index.html'">
+  🏠 Home
+</button>
+<audio id="bgMusic" autoplay loop>
+  <source src="youandi.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById("bgMusic");
+
+  // START from a specific time the very first time
+  const START_TIME = 2; // seconds (change if you want)
+
+  // Resume time if saved
+  const savedTime = localStorage.getItem("musicTime");
+  music.currentTime = savedTime ? parseFloat(savedTime) : START_TIME;
+
+  // Save current time continuously
+  setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+  }, 1000);
+</script>
+
+</body>
+</html>
